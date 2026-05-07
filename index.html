@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aido Estilistas · Centro Bellum | Salón de Peluquería & Belleza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1412;
+      --ink-mid: #3d2f2a;
+      --bg: #faf7f4;
+      --bg2: #f2ede7;
+      --gold: #c49a5a;
+      --gold-light: #dbb87a;
+      --gold-dark: #9a7640;
+      --text: #5c4c44;
+      --text-light: #8c7a72;
+      --border: rgba(196,154,90,0.25);
+      --rose: #b8746a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.7; }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 0 3.5rem; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.35s, box-shadow 0.35s;
+    }
+    nav.scrolled {
+      background: rgba(250, 247, 244, 0.95);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 20px rgba(26,20,18,0.07);
+    }
+    .nav-brand {
+      display: flex; flex-direction: column; line-height: 1;
+    }
+    .nav-brand-top {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--ink);
+    }
+    .nav-brand-top span { color: var(--gold); }
+    .nav-brand-sub { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-light); }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-mid); transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--ink) !important; color: var(--bg) !important;
+      padding: 0.5rem 1.3rem; border-radius: 3px;
+    }
+    .nav-cta:hover { background: var(--gold-dark) !important; color: white !important; }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem;
+      padding: 110px 5rem 80px;
+      background: linear-gradient(140deg, var(--bg) 0%, var(--bg2) 60%, rgba(196,154,90,0.06) 100%);
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; bottom: -10%; left: -5%;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(196,154,90,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; top: 15%; right: 42%;
+      width: 1px; height: 60%;
+      background: linear-gradient(to bottom, transparent, rgba(196,154,90,0.2), transparent);
+    }
+
+    .hero-overline {
+      font-size: 0.7rem; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.9rem;
+    }
+    .hero-overline::before {
+      content: ''; display: block; width: 36px; height: 1px; background: var(--gold);
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      line-height: 1.1; color: var(--ink); margin-bottom: 1.3rem; font-weight: 300;
+    }
+    .hero-title strong { font-weight: 600; }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-sub {
+      font-size: 1rem; color: var(--text); margin-bottom: 2.2rem;
+      max-width: 440px; line-height: 1.75;
+    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--ink); color: var(--bg);
+      padding: 0.9rem 2rem; border-radius: 3px;
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { background: var(--gold-dark); transform: translateY(-2px); }
+    .btn-ghost {
+      border: 1px solid var(--gold); color: var(--gold);
+      padding: 0.9rem 2rem; border-radius: 3px;
+      font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-ghost:hover { background: var(--gold); color: white; }
+
+    /* Instagram Card */
+    .ig-card {
+      background: white;
+      border-radius: 20px; padding: 1.8rem;
+      box-shadow: 0 28px 70px rgba(26,20,18,0.11), 0 4px 20px rgba(196,154,90,0.08);
+      max-width: 360px; margin: 0 auto; position: relative; z-index: 1;
+    }
+    .ig-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.1rem; }
+    .ig-ring {
+      width: 70px; height: 70px; border-radius: 50%; padding: 3px; flex-shrink: 0;
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      animation: huerot 6s linear infinite;
+    }
+    @keyframes huerot { to { filter: hue-rotate(360deg); } }
+    .ig-ring-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      border: 2.5px solid white; overflow: hidden; background: var(--bg2);
+    }
+    .ig-ring-inner img { width: 100%; height: 100%; object-fit: cover; }
+    .ig-nameline { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.2rem; }
+    .ig-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem; font-weight: 600; color: var(--ink); line-height: 1.2;
+    }
+    .ig-badge {
+      width: 16px; height: 16px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ig-badge svg { width: 8px; height: 8px; fill: white; }
+    .ig-handle { font-size: 0.74rem; color: var(--text-light); }
+
+    .ig-stats { display: flex; gap: 0.4rem; margin-bottom: 1rem; }
+    .ig-stat {
+      flex: 1; padding: 0.55rem 0.2rem;
+      background: var(--bg); border-radius: 10px; text-align: center;
+    }
+    .ig-stat-n { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); display: block; }
+    .ig-stat-l { font-size: 0.62rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; }
+
+    .ig-bio {
+      font-size: 0.82rem; color: var(--text); line-height: 1.6;
+      margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+    }
+    .ig-actions { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .ig-btn {
+      flex: 1; padding: 0.55rem 0.4rem; border-radius: 8px;
+      font-size: 0.76rem; font-weight: 500; text-align: center; transition: opacity 0.2s;
+    }
+    .ig-btn:hover { opacity: 0.8; }
+    .ig-follow { background: #0095f6; color: white; }
+    .ig-msg { background: var(--bg); color: var(--ink); border: 1px solid var(--border); }
+
+    .ig-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 3px; border-radius: 10px; overflow: hidden; }
+    .ig-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: opacity 0.2s; }
+    .ig-grid img:hover { opacity: 0.8; }
+
+    .ig-more {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      margin-top: 0.9rem; font-size: 0.76rem; color: var(--gold); font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 100px 5rem; }
+    .overline {
+      font-size: 0.68rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    .overline::before { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); }
+    .overline.c { justify-content: center; }
+    .overline.c::before { display: none; }
+    h2.sec-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1.15; color: var(--ink);
+      margin-bottom: 1.5rem; font-weight: 300;
+    }
+    h2.sec-title strong { font-weight: 600; }
+    h2.sec-title em { font-style: italic; color: var(--gold); }
+    h2.sec-title.c { text-align: center; }
+
+    /* ===== SOBRE ===== */
+    #sobre { background: white; }
+    .sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .sobre-photos {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      position: relative;
+    }
+    .sobre-photos::before {
+      content: '';
+      position: absolute; bottom: -16px; right: -16px;
+      width: 60%; height: 60%; border: 1px solid var(--gold); border-radius: 4px;
+      z-index: 0; pointer-events: none;
+    }
+    .sobre-photos img {
+      width: 100%; border-radius: 8px; object-fit: cover; position: relative; z-index: 1;
+    }
+    .sobre-photos img:first-child { grid-column: 1 / -1; aspect-ratio: 16/9; }
+    .sobre-photos img:not(:first-child) { aspect-ratio: 1; }
+    .sobre-text p { color: var(--text); margin-bottom: 1.2rem; font-size: 0.97rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
+    .tag {
+      background: var(--bg2); border: 1px solid var(--border);
+      color: var(--ink-mid); padding: 0.4rem 0.9rem;
+      border-radius: 50px; font-size: 0.78rem;
+    }
+
+    /* ===== SERVICIOS ===== */
+    #servicios { background: var(--bg2); }
+    .svc-header { text-align: center; max-width: 560px; margin: 0 auto 3.5rem; }
+    .svc-header p { color: var(--text); }
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .svc-card {
+      background: white; border-radius: 14px; padding: 2rem 1.8rem;
+      border: 1px solid var(--border); position: relative; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .svc-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+    .svc-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(26,20,18,0.1); }
+    .svc-card.dark { background: var(--ink); border-color: transparent; }
+    .svc-card.dark .svc-name { color: white; }
+    .svc-card.dark .svc-desc { color: rgba(255,255,255,0.62); }
+    .svc-card.dark .svc-icon { opacity: 0.9; }
+    .svc-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .svc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
+    .svc-desc { font-size: 0.87rem; color: var(--text); line-height: 1.65; }
+
+    /* ===== GALERÍA ===== */
+    #galeria { background: white; }
+    .gal-header { text-align: center; margin-bottom: 3rem; }
+    .gal-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+      max-width: 1100px; margin: 0 auto 2.5rem;
+    }
+    .gal-item { position: relative; overflow: hidden; border-radius: 6px; cursor: pointer; }
+    .gal-item:nth-child(1), .gal-item:nth-child(7) { grid-column: span 2; grid-row: span 2; }
+    .gal-item img { width: 100%; height: 100%; min-height: 160px; object-fit: cover; transition: transform 0.5s; }
+    .gal-item:hover img { transform: scale(1.07); }
+    .gal-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,20,18,0.6), transparent);
+      opacity: 0; transition: opacity 0.3s;
+      display: flex; align-items: flex-end; padding: 0.9rem;
+    }
+    .gal-item:hover .gal-overlay { opacity: 1; }
+    .gal-overlay span { color: rgba(255,255,255,0.9); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; }
+    .gal-cta { text-align: center; }
+
+    /* ===== METRICS ===== */
+    #metrics { background: var(--ink); color: white; text-align: center; padding: 90px 5rem; }
+    #metrics .overline { color: var(--gold-light); justify-content: center; }
+    #metrics .overline::before { display: none; }
+    #metrics h2.sec-title { color: white; }
+    .met-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+      max-width: 880px; margin: 3rem auto 0;
+    }
+    .met-card {
+      padding: 1.6rem 1rem; border: 1px solid rgba(196,154,90,0.2);
+      border-radius: 10px; background: rgba(255,255,255,0.04);
+    }
+    .met-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 400;
+      color: var(--gold-light); display: block; line-height: 1; margin-bottom: 0.5rem;
+    }
+    .met-label { font-size: 0.72rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.12em; }
+
+    /* ===== CONTACTO ===== */
+    #contacto { background: var(--bg2); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-desc { color: var(--text); margin-bottom: 2rem; line-height: 1.75; }
+    .contact-items { display: flex; flex-direction: column; gap: 1.2rem; }
+    .citem { display: flex; align-items: flex-start; gap: 1.1rem; }
+    .cicon {
+      width: 46px; height: 46px; background: white;
+      border: 1px solid var(--border); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; flex-shrink: 0;
+    }
+    .citem-info strong { display: block; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.15rem; }
+    .citem-info span { color: var(--ink); font-size: 0.94rem; }
+    .citem-info a:hover { color: var(--gold); }
+
+    .cform {
+      background: white; border-radius: 16px; padding: 2.2rem;
+      box-shadow: 0 6px 32px rgba(26,20,18,0.06);
+    }
+    .cform h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 1.6rem; color: var(--ink); font-weight: 600; }
+    .fgroup { margin-bottom: 1.2rem; }
+    .fgroup label { display: block; font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); margin-bottom: 0.4rem; }
+    .fgroup input, .fgroup textarea, .fgroup select {
+      width: 100%; padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      background: var(--bg); color: var(--ink);
+      font-family: 'DM Sans', sans-serif; font-size: 0.94rem;
+      transition: border-color 0.2s; outline: none;
+    }
+    .fgroup input:focus, .fgroup textarea:focus, .fgroup select:focus { border-color: var(--gold); }
+    .fgroup textarea { resize: vertical; min-height: 90px; }
+    .fsub {
+      width: 100%; background: var(--ink); color: white; border: none;
+      padding: 1rem; border-radius: 8px; font-size: 0.84rem;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+      transition: background 0.2s; font-family: 'DM Sans', sans-serif;
+    }
+    .fsub:hover { background: var(--gold-dark); }
+
+    /* ===== FOOTER ===== */
+    footer { background: var(--ink); color: rgba(255,255,255,0.55); padding: 3.5rem 5rem 2rem; }
+    .footer-top {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem;
+      margin-bottom: 2.5rem; padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .fbrand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; color: white; margin-bottom: 0.5rem; font-weight: 600;
+    }
+    .fbrand-name span { color: var(--gold-light); }
+    .fbrand p { font-size: 0.86rem; line-height: 1.7; margin-top: 0.7rem; max-width: 260px; }
+    .fsocials { display: flex; gap: 0.6rem; margin-top: 1.5rem; }
+    .fsoc {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: background 0.2s;
+    }
+    .fsoc:hover { background: var(--gold); }
+    .fcol h4 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: white; margin-bottom: 1rem; font-weight: 600; }
+    .flinks { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .flinks a { font-size: 0.85rem; transition: color 0.2s; }
+    .flinks a:hover { color: var(--gold-light); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; }
+
+    /* WhatsApp float */
+    .wa-float {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 56px; height: 56px; background: #25D366;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45); z-index: 999;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ===== ANIMACIONES ===== */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.on { opacity: 1; transform: none; }
+    .reveal-l { opacity: 0; transform: translateX(-30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-l.on { opacity: 1; transform: none; }
+    .reveal-r { opacity: 0; transform: translateX(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-r.on { opacity: 1; transform: none; }
+    .stag { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .stag.on { opacity: 1; transform: none; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      section { padding: 80px 3rem; }
+      #hero { padding: 110px 3rem 80px; gap: 3rem; }
+      .svc-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 3rem 3rem 1.5rem; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 70px 1.8rem; }
+      #hero { grid-template-columns: 1fr; padding: 100px 1.8rem 60px; text-align: center; gap: 3rem; }
+      .hero-overline { justify-content: center; }
+      .hero-overline::before { display: none; }
+      .hero-sub { margin: 0 auto 2rem; }
+      .hero-actions { justify-content: center; }
+      .ig-card { margin: 0 auto; }
+      .sobre-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .met-grid { grid-template-columns: repeat(2, 1fr); }
+      .gal-grid { grid-template-columns: repeat(2, 1fr); }
+      .gal-item:nth-child(1), .gal-item:nth-child(7) { grid-column: span 1; grid-row: span 1; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      nav .nav-links { display: none; }
+      footer { padding: 2.5rem 1.5rem 1.5rem; }
+      .svc-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      section { padding: 60px 1.2rem; }
+      #hero { padding: 90px 1.2rem 50px; }
+      #metrics { padding: 70px 1.2rem; }
+      .met-grid { gap: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-brand">
+    <span class="nav-brand-top">Aido <span>Estilistas</span></span>
+    <span class="nav-brand-sub">Centro Bellum</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Nosotros</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#contacto" class="nav-cta">Reservar cita</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <div class="hero-overline">Salón de Peluquería &amp; Belleza</div>
+    <h1 class="hero-title">
+      El arte de <em>transformar</em><br>
+      <strong>tu imagen</strong>
+    </h1>
+    <p class="hero-sub">
+      En Aido Estilistas / Centro Bellum cuidamos cada detalle para que salgas sintiéndote
+      exactamente como quieres. Técnica, estilo y dedicación en cada visita.
+    </p>
+    <div class="hero-actions">
+      <a href="https://www.instagram.com/aido_estilistas/" target="_blank" class="btn-primary">
+        📷 Ver en Instagram
+      </a>
+      <a href="#galeria" class="btn-ghost">✨ Ver trabajos</a>
+    </div>
+  </div>
+
+  <!-- Instagram Card -->
+  <div class="ig-card">
+    <div class="ig-top">
+      <div class="ig-ring">
+        <div class="ig-ring-inner">
+          <img src="assets/profile.jpg" alt="Aido Estilistas"
+               onerror="this.src='https://ui-avatars.com/api/?name=AE&background=c49a5a&color=fff&size=128'">
+        </div>
+      </div>
+      <div>
+        <div class="ig-nameline">
+          <span class="ig-name">Aido Estilistas · Centro Bellum</span>
+          <div class="ig-badge">
+            <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </div>
+        </div>
+        <div class="ig-handle">@aido_estilistas</div>
+      </div>
+    </div>
+
+    <div class="ig-stats">
+      <div class="ig-stat">
+        <span class="ig-stat-n">868</span>
+        <span class="ig-stat-l">Posts</span>
+      </div>
+      <div class="ig-stat">
+        <span class="ig-stat-n">1.157</span>
+        <span class="ig-stat-l">Seguidores</span>
+      </div>
+      <div class="ig-stat">
+        <span class="ig-stat-n">1.088</span>
+        <span class="ig-stat-l">Siguiendo</span>
+      </div>
+    </div>
+
+    <p class="ig-bio">
+      ✂️ Salón de Peluquería &amp; Centro de Belleza<br>
+      💎 Estilo, técnica y dedicación en cada servicio<br>
+      📸 868 publicaciones · ¡Síguenos para inspiración!
+    </p>
+
+    <div class="ig-actions">
+      <a href="https://www.instagram.com/aido_estilistas/" target="_blank" class="ig-btn ig-follow">Seguir en IG</a>
+      <a href="#contacto" class="ig-btn ig-msg">Reservar</a>
+    </div>
+
+    <div class="ig-grid">
+      <img src="assets/post-1.jpg" alt="Trabajo 1" onerror="this.style.background='#f2ede7';this.style.minHeight='80px'">
+      <img src="assets/post-2.jpg" alt="Trabajo 2" onerror="this.style.background='#f2ede7';this.style.minHeight='80px'">
+      <img src="assets/post-3.jpg" alt="Trabajo 3" onerror="this.style.background='#f2ede7';this.style.minHeight='80px'">
+      <img src="assets/post-4.jpg" alt="Trabajo 4" onerror="this.style.background='#f2ede7';this.style.minHeight='80px'">
+      <img src="assets/post-5.jpg" alt="Trabajo 5" onerror="this.style.background='#f2ede7';this.style.minHeight='80px'">
+      <img src="assets/post-6.jpg" alt="Trabajo 6" onerror="this.style.background='#f2ede7';this.style.minHeight='80px'">
+    </div>
+
+    <a href="https://www.instagram.com/aido_estilistas/" target="_blank" class="ig-more">
+      📷 Ver perfil completo en Instagram →
+    </a>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre-grid">
+    <div class="sobre-photos reveal-l">
+      <img src="assets/post-7.jpg" alt="Trabajo en salón" onerror="this.src='assets/post-1.jpg'">
+      <img src="assets/post-8.jpg" alt="Resultado" onerror="this.src='assets/post-2.jpg'">
+      <img src="assets/post-9.jpg" alt="Tratamiento" onerror="this.src='assets/post-3.jpg'">
+    </div>
+    <div class="sobre-text reveal-r">
+      <div class="overline">Quiénes somos</div>
+      <h2 class="sec-title">Pasión por el <em>estilo</em><br><strong>y la belleza</strong></h2>
+      <p>
+        Somos Aido Estilistas / Centro Bellum, un salón con alma donde cada cliente recibe
+        una atención personalizada y resultados que hablan por sí solos. Nuestro equipo combina
+        técnica avanzada con un trato cercano y profesional.
+      </p>
+      <p>
+        Con más de 868 publicaciones en Instagram y una comunidad de más de 1.157 seguidores,
+        compartimos cada día nuestra pasión por el cabello, la belleza y el bienestar.
+      </p>
+      <div class="tags">
+        <span class="tag">✂️ Peluquería</span>
+        <span class="tag">💆 Centro de Belleza</span>
+        <span class="tag">🎨 Coloración</span>
+        <span class="tag">✨ Tratamientos</span>
+        <span class="tag">💅 Estética</span>
+        <span class="tag">👁️ Extensiones</span>
+      </div>
+      <a href="https://www.instagram.com/aido_estilistas/" target="_blank" class="btn-primary" style="display:inline-flex">
+        📷 Seguirnos en Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="svc-header reveal">
+    <div class="overline c">Nuestros servicios</div>
+    <h2 class="sec-title c">Lo que hacemos <em>mejor</em></h2>
+    <p>Servicios profesionales para el cuidado completo de tu cabello y belleza, con los mejores productos del mercado.</p>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card dark stag">
+      <div class="svc-icon">✂️</div>
+      <div class="svc-name">Corte &amp; Estilo</div>
+      <div class="svc-desc">Cortes personalizados adaptados a tu tipo de cabello, forma de cara y estilo de vida. Técnica y creatividad en cada tijera.</div>
+    </div>
+    <div class="svc-card dark stag">
+      <div class="svc-icon">🎨</div>
+      <div class="svc-name">Color &amp; Mechas</div>
+      <div class="svc-desc">Coloración con técnicas actuales: balayage, mechas, tintes y degradados. Colores que cuidan y transforman tu cabello.</div>
+    </div>
+    <div class="svc-card stag">
+      <div class="svc-icon">✨</div>
+      <div class="svc-name">Tratamientos Capilares</div>
+      <div class="svc-desc">Hidratación profunda, keratinas, alisados y tratamientos reconstructores para devolver la vida y el brillo a tu cabello.</div>
+    </div>
+    <div class="svc-card stag">
+      <div class="svc-icon">💆</div>
+      <div class="svc-name">Centro de Belleza</div>
+      <div class="svc-desc">Tratamientos faciales, depilación y cuidado corporal. Tu belleza integral en un solo lugar.</div>
+    </div>
+    <div class="svc-card stag">
+      <div class="svc-icon">💅</div>
+      <div class="svc-name">Manicura &amp; Pedicura</div>
+      <div class="svc-desc">Cuidado y embellecimiento de manos y pies. Acabados perfectos con las mejores marcas.</div>
+    </div>
+    <div class="svc-card stag" style="display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+      <div class="svc-icon">📅</div>
+      <div class="svc-name">¿Hablamos?</div>
+      <div class="svc-desc" style="margin-bottom:1.2rem;">Cuéntanos qué necesitas y te asesoramos sin compromiso.</div>
+      <a href="#contacto" class="btn-primary" style="font-size:0.76rem; padding:0.7rem 1.4rem;">Pedir cita</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section id="galeria">
+  <div class="gal-header reveal">
+    <div class="overline c">Nuestros trabajos</div>
+    <h2 class="sec-title c">Cada resultado, <em>una historia</em></h2>
+  </div>
+  <div class="gal-grid">
+    <div class="gal-item stag"><img src="assets/post-1.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-2.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-3.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-4.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-5.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-6.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-7.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-8.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-9.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-10.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-11.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+    <div class="gal-item stag"><img src="assets/post-12.jpg" alt=""><div class="gal-overlay"><span>Ver en Instagram</span></div></div>
+  </div>
+  <div class="gal-cta">
+    <a href="https://www.instagram.com/aido_estilistas/" target="_blank" class="btn-ghost">
+      📷 Ver más en Instagram
+    </a>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section id="metrics">
+  <div class="reveal">
+    <div class="overline">Números que hablan</div>
+    <h2 class="sec-title c">La confianza de <em>nuestra comunidad</em></h2>
+    <p style="color:rgba(255,255,255,0.5); text-align:center; max-width:460px; margin:0 auto;">Más de mil clientes nos siguen en Instagram. Cada publicación cuenta una historia real.</p>
+  </div>
+  <div class="met-grid">
+    <div class="met-card stag">
+      <span class="met-num" data-target="1157">0</span>
+      <span class="met-label">Seguidores Instagram</span>
+    </div>
+    <div class="met-card stag">
+      <span class="met-num" data-target="868">0</span>
+      <span class="met-label">Publicaciones</span>
+    </div>
+    <div class="met-card stag">
+      <span class="met-num" data-target="100">0</span>
+      <span class="met-label">Clientes al mes</span>
+    </div>
+    <div class="met-card stag">
+      <span class="met-num">5★</span>
+      <span class="met-label">Satisfacción</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-grid">
+    <div class="reveal-l">
+      <div class="overline">Contacto</div>
+      <h2 class="sec-title">¿Reservamos <em>tu cita</em>?</h2>
+      <p class="contact-desc">
+        Ponte en contacto con nosotros para reservar tu cita o resolver cualquier duda.
+        Estaremos encantados de asesorarte y ofrecerte el servicio que mejor se adapte a ti.
+      </p>
+      <div class="contact-items">
+        <div class="citem">
+          <div class="cicon">📷</div>
+          <div class="citem-info">
+            <strong>Instagram</strong>
+            <span><a href="https://www.instagram.com/aido_estilistas/" target="_blank">@aido_estilistas</a></span>
+          </div>
+        </div>
+        <div class="citem">
+          <div class="cicon">📍</div>
+          <div class="citem-info">
+            <strong>Ubicación</strong>
+            <span>Síguenos en Instagram para conocer nuestra dirección</span>
+          </div>
+        </div>
+        <div class="citem">
+          <div class="cicon">🕐</div>
+          <div class="citem-info">
+            <strong>Cita previa</strong>
+            <span>Consulta disponibilidad por Instagram o formulario</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cform reveal-r">
+      <h3>Solicitar información</h3>
+      <div class="fgroup">
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre">
+      </div>
+      <div class="fgroup">
+        <label>Teléfono o email</label>
+        <input type="text" placeholder="Cómo contactarte">
+      </div>
+      <div class="fgroup">
+        <label>Servicio de interés</label>
+        <select>
+          <option value="">Seleccionar servicio</option>
+          <option>Corte &amp; Estilo</option>
+          <option>Color &amp; Mechas</option>
+          <option>Tratamiento Capilar</option>
+          <option>Centro de Belleza</option>
+          <option>Manicura &amp; Pedicura</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="fgroup">
+        <label>Mensaje</label>
+        <textarea placeholder="Cuéntanos qué necesitas..."></textarea>
+      </div>
+      <button class="fsub">Enviar consulta</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="fbrand">
+      <div class="fbrand-name">Aido <span>Estilistas</span></div>
+      <p>Salón de peluquería y centro de belleza. Donde el estilo y el cuidado se fusionan para darte lo mejor.</p>
+      <div class="fsocials">
+        <a href="https://www.instagram.com/aido_estilistas/" target="_blank" class="fsoc">📷</a>
+      </div>
+    </div>
+    <div class="fcol">
+      <h4>Servicios</h4>
+      <ul class="flinks">
+        <li><a href="#servicios">Corte &amp; Estilo</a></li>
+        <li><a href="#servicios">Color &amp; Mechas</a></li>
+        <li><a href="#servicios">Tratamientos</a></li>
+        <li><a href="#servicios">Centro Belleza</a></li>
+        <li><a href="#servicios">Manicura</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h4>Contacto</h4>
+      <ul class="flinks">
+        <li><a href="https://www.instagram.com/aido_estilistas/" target="_blank">Instagram</a></li>
+        <li><a href="#contacto">Formulario</a></li>
+        <li><a href="#galeria">Galería</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Aido Estilistas · Centro Bellum. Todos los derechos reservados.</span>
+    <a href="https://www.instagram.com/aido_estilistas/" target="_blank" style="color:var(--gold-light)">@aido_estilistas</a>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a href="https://www.instagram.com/aido_estilistas/" target="_blank" class="wa-float" title="Ver en Instagram">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </svg>
+</a>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Intersection Observer for animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('on');
+        // Stagger children
+        if (entry.target.classList.contains('svc-grid') || entry.target.classList.contains('gal-grid') || entry.target.classList.contains('met-grid')) {
+          const children = entry.target.querySelectorAll('.stag');
+          children.forEach((child, i) => {
+            setTimeout(() => child.classList.add('on'), i * 90);
+          });
+        }
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal, .reveal-l, .reveal-r, .stag, .svc-grid, .gal-grid, .met-grid').forEach(el => {
+    observer.observe(el);
+  });
+
+  // Counter animation
+  const counters = document.querySelectorAll('[data-target]');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = parseInt(entry.target.dataset.target);
+        const duration = 1800;
+        const step = target / (duration / 16);
+        let current = 0;
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          const display = Math.floor(current);
+          entry.target.textContent = display >= 1000
+            ? (display / 1000).toFixed(display % 1000 === 0 ? 0 : 3).replace('.', ',')
+            : display;
+          if (current >= target) clearInterval(timer);
+        }, 16);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => counterObserver.observe(c));
+</script>
+</body>
+</html>
